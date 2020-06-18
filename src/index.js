@@ -1,22 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
- 
+import SeasonDisplay from './Seasondisplay';
+ import Loader from './loading';
 
 
 class App extends React.Component{
     
     // This is not react specific but js script
-    constructor(props)
-    {
-        super(props);
-        this.state={
-            // when we want to make some key but dont want to assign yet but eventually will fill it up ,then we use null
-            lat:null,
-            errorMssg:''
-        };
-        
-         window.navigator.geolocation.getCurrentPosition(
+    state={lat:null,errorMssg:''};  
+
+    componentDidMount(){
+        window.navigator.geolocation.getCurrentPosition(
             (pos)=>{ 
                 // To update our state we use setState 
                 this.setState({ lat:pos.coords.latitude })
@@ -26,7 +20,7 @@ class App extends React.Component{
                 this.setState({ errorMssg: err.message }); 
             }
         )
-    }
+    }    
     // render method (Which is required by react )
     render()
     {
@@ -38,10 +32,10 @@ class App extends React.Component{
 
         if(!this.state.errorMssg && this.state.lat )
         {
-            return <div>latitude:{this.state.lat} </div>
+            return <SeasonDisplay lat={this.state.lat} />;
         }
 
-        return <div>Loading!!</div>
+        return <Loader/>
     }
 
 };
