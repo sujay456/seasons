@@ -1,14 +1,18 @@
 import React from 'react';
 
-const loader= ()=>
+const Loader= (props)=>
 {
     return (
             <div class="ui active dimmer">
-                <div class="ui big text loader">Loading</div>
+                <div class="ui big text loader"> {props.message} </div>
             </div>
             
         
     );
 }
 
-export default loader;
+Loader.defaultProps={
+    message:"Loading..."
+}
+
+export default Loader;
